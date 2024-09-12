@@ -1,0 +1,18 @@
+#include<iostream>
+#include<stdexcept>
+using namespace std;
+void riskyfunction(int divisor){
+  if(divisor<=0){
+    throw runtime_error("no zero");
+  }
+  cout<<"result:"<<(divisor/10)<<endl;
+}
+int main(){
+  int e;
+  try{
+    riskyfunction(0);
+  }catch(const runtime_error& e){
+    cout<<"cought an exception"<<e.what()<<endl;
+  }
+  cout<<"program continues";
+}
