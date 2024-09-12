@@ -1,0 +1,32 @@
+#include <iostream>
+#include <stdexcept>
+void functionA() {
+    try {
+        std::cout << "Entering functionA...\n";
+        throw std::runtime_error("Error in functionA");
+        std::cout << "Exiting functionA normally.\n";
+    } catch (const std::runtime_error& e) {
+        std::cout << "Caught in functionA: " << e.what();
+        throw;
+    }
+}
+void functionB() {
+    try {
+        std::cout << "Entering functionB...\n";
+        functionA();
+        std::cout << "Exiting functionB normally.\n";
+    } catch (const std::runtime_error& e) {
+        std::cout << "Caught in functionB: " << e.what();
+    }
+}
+int main() {
+    try {
+        std::cout << "Entering main...\n";
+        functionB();
+        std::cout << "Exiting main normally.\n";
+    } catch (const std::exception& e) {
+        std::cout << "Caught in main: " << e.what() << '\n';
+    }
+
+    return 0;
+}
