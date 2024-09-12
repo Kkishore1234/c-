@@ -1,0 +1,31 @@
+#include <iostream>
+#include <exception>
+class FinallyBlock {
+public:
+    FinallyBlock() {
+        std::cout << "Entering the protected block.\n";
+    }
+    ~FinallyBlock() {
+        std::cout << "Entering the finally block.\n";
+    }
+};
+
+void someFunction() {
+    FinallyBlock finallyBlock;
+    try {
+        std::cout << "Inside the try block.\n";
+        std::cout << "Exiting the try block normally.\n";
+    } catch (const std::exception& e) {
+        std::cout << "Caught an exception: " << e.what() << '\n';
+    }
+}
+
+int main() {
+    try {
+        someFunction();
+    } catch (const std::exception& e) {
+        std::cout << "Exception in main: " << e.what() << '\n';
+    }
+
+    return 0;
+}
